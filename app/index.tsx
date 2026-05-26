@@ -1,46 +1,50 @@
-// import { Text, View } from "react-native";
+import { useEffect } from 'react';
 
-// export default function Index() {
-//   return (
-//     <View
-//       style={{
-//         flex: 1,
-//         justifyContent: "center",
-//         alignItems: "center",
-//       }}
-//     >
-//       <Text>Edit app/index.tsx to edit this screen.</Text>
-//     </View>
-//   );
-// }
+import { ActivityIndicator, View } from 'react-native';
 
-//Import libraries
-import React from 'react';
-import {Text, View} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-//Import components
-const App = () => {
+import { router } from 'expo-router';
+
+export default function IndexScreen() {
+
+  useEffect(() => {
+
+    checkAppState();
+
+  }, []);
+
+  async function checkAppState() {
+
+    const hasSelectedPosition =
+      await AsyncStorage.getItem(
+        'hasSelectedPosition'
+      );
+
+    if (hasSelectedPosition === 'true') {
+
+      router.replace('/home');
+
+    } else {
+
+      router.replace('/seleccionar');
+
+    }
+  }
+
   return (
+
     <View
       style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-      }}>
-      <Text>Bienvenido al Reloj Postural!</Text>
+      }}
+    >
+
+      <ActivityIndicator size="large" />
+
     </View>
-    
+
   );
 }
-
-//Import styles
-const styles = {
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-};
-
-//Create component
-export default App;
