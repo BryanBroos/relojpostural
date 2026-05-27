@@ -1,10 +1,11 @@
 import { router } from 'expo-router';
 
 import {
+  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 
 import { scheduleNotification } from '../utils/notificaciones';
@@ -42,6 +43,22 @@ async function savePosition() {
   router.replace('/home');
 }
 
+const positionsInfo: any = {
+
+  1: {
+    title: 'Decúbito Lateral Izquierdo',
+    image: require('../assets/images/izquierda.png'),
+  },
+  2: {
+    title: 'Boca Arriba (Dorsal)',
+    image: require('../assets/images/dorsal.png'),
+  },
+  3: {
+    title: 'Decúbito Lateral Derecho',
+    image: require('../assets/images/derecha.png'),
+  },
+};
+
   return (
 
     <View style={styles.container}>
@@ -65,9 +82,14 @@ async function savePosition() {
         >
 
           <Text style={styles.cardText}>
-            Posición {position}
+            {positionsInfo[position].title}
           </Text>
 
+          <Image
+            source={positionsInfo[position].image}
+            style={styles.image}
+            />
+      
         </TouchableOpacity>
 
       ))}
@@ -145,6 +167,13 @@ button: {
     color: '#FFF',
     fontSize: 20,
     fontWeight: 'bold',
+  },
+
+  image: {
+    width: 105,
+    height: 45,
+    resizeMode: 'contain',
+    marginTop: 2,
   },
 
 });

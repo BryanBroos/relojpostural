@@ -102,6 +102,31 @@ async function loadPosition() {
 
 ];
 
+const positionsInfo: any = {
+
+  1: {
+
+    title: 'Decúbito Lateral Izquierdo',
+
+    image: require('../assets/images/izquierda.png'),
+  },
+
+  2: {
+
+    title: 'Boca Arriba (Dorsal)',
+
+    image: require('../assets/images/dorsal.png'),
+  },
+
+  3: {
+
+    title: 'Decúbito Lateral Derecho',
+
+    image: require('../assets/images/derecha.png'),
+  },
+
+};
+
 return (
 
   <>
@@ -151,7 +176,7 @@ return (
                 styles.activeCardText
               ]}
             >
-              Posición {position.id}
+              {positionsInfo[position.id].title}
             </Text>
 
             <Image
